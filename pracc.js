@@ -83,7 +83,52 @@ function line(start, end) {
   return arrayOfCoordinates;
 }
 
+const amoba = (map) => {
+  let result = "Draw";
+  //Check the diagonals
+  if (
+    (map[0][0] == map[1][1] && map[0][0] == map[2][2]) ||
+    (map[0][2] == map[1][1] && map[0][2] == map[2][0])
+  ) {
+    result = map[1][1] + " wins";
+    return result;
+  }
+  //Else check each row for the searched pattern
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      //First row check + each column check
+      if (i == 0) {
+        if (
+          (map[i][j] == map[i][j + 1] && map[i][j] == map[i][j + 2]) ||
+          (map[i][j] == map[i + 1][j] && map[i][j] == map[i + 2][j])
+        ) {
+          result = map[i][j] + " wins";
+        }
+        //Second row check
+      } else if (i == 1) {
+        if (map[i][j] == map[i][j + 1] && map[i][j] == map[i][j + 2]) {
+          result = map[i][j] + " wins";
+        }
+      }
+      //Third row check
+      else {
+        if (map[i][j] == map[i][j + 1] && map[i][j] == map[i][j + 2]) {
+          result = map[i][j] + " wins";
+        }
+      }
+    }
+  }
+  return result;
+};
+
 let start = { x: 6, y: 5 };
 let end = { x: 7, y: 8 };
 //
 console.log(line(start, end));
+
+let stateOfGame = [
+  ["o", "x", "x"],
+  ["o", "o", "x"],
+  ["x", "o", "x"],
+];
+console.log(amoba(stateOfGame));
